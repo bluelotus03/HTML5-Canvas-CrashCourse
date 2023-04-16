@@ -98,6 +98,9 @@ class Particle {
         // Y --> + mmoves down, - moves up
         this.speedX = Math.random() * 3  - 1.5;
         this.speedY = Math.random() * 3  - 1.5;
+
+        // Assigns particles different colors at point of creation
+        this.color = 'hsl(' + hue + ', 100%, 50%)';
     }
 
     // Change x and y coordinates based on speed values
@@ -118,7 +121,7 @@ class Particle {
         // Hue - degree on the color wheel from 0 -> 360 (0 is red, 120 is green, 240 is blue)
         // Saturation - percentage value (0% is gray, 100% is full color)
         // Lightness - percentage value (0% is black, 100% is white), so keep at 50% to see full color not affected by light or dark
-        ctx.fillStyle = 'hsl(' + hue + ', 100%, 50%)';
+        ctx.fillStyle = this.color;
 
         // To draw new things, lets JS know we are drawing a new shape not connected to previous lines (if there are any)
         ctx.beginPath();
@@ -166,6 +169,7 @@ function animate(){
     handleParticles();
 
     // Increase hue for every animation step
+    // If wanted to make color changes faster or slower, can do soemthing like hue += 0.5 (then increase/decrease value)
     hue++;
 
     // Calls the function we pass it as an arg
