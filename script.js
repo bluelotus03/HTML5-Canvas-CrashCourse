@@ -21,6 +21,9 @@ canvas.height = window.innerHeight;
 // Used for Particle class to store new particles (circles) in an array
 const particlesArray = [];
 
+// Will be used to cycle through color spectrum
+let hue = 0;
+
 // Takes in what type of event we want to listen for and callback function with code that will run that event occurs
 window.addEventListener('resize', function(){
     
@@ -110,7 +113,12 @@ class Particle {
     }
 
     draw(){
-        ctx.fillStyle = 'white';
+
+        // HSL --> Hue Saturation Lightness (another way to specify color rgb, rgba, hex, and hsl)
+        // Hue - degree on the color wheel from 0 -> 360 (0 is red, 120 is green, 240 is blue)
+        // Saturation - percentage value (0% is gray, 100% is full color)
+        // Lightness - percentage value (0% is black, 100% is white), so keep at 50% to see full color not affected by light or dark
+        ctx.fillStyle = 'hsl(' + hue + ', 100%, 50%)';
 
         // To draw new things, lets JS know we are drawing a new shape not connected to previous lines (if there are any)
         ctx.beginPath();
@@ -156,6 +164,9 @@ function animate(){
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     handleParticles();
+
+    // Increase hue for every animation step
+    hue++;
 
     // Calls the function we pass it as an arg
     // Passing it the parent function will create a loop
