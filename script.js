@@ -51,6 +51,10 @@ canvas.addEventListener('click', function(event){
 
     mouse.x = event.x;
     mouse.y = event.y;
+
+    for (i = 0; i < 10; i++){
+        particlesArray.push(new Particle());
+    }
     
 })
 
@@ -59,6 +63,10 @@ canvas.addEventListener('click', function(event){
 canvas.addEventListener('mousemove', function(event){
     mouse.x = event.x;
     mouse.y = event.y;
+
+    for (i = 0; i < 2; i++){
+        particlesArray.push(new Particle());
+    }
 })
 
 // JS class is a blueprint where we define behavior and properties of the objects
@@ -71,9 +79,13 @@ class Particle {
     // Method - a function on an object
     constructor(){
 
+        // Causes each particle's initial position to be under the mouse
+        this.x = mouse.x;
+        this.y = mouse.y;
+
         // Set initially to between 0 and canvas width or height
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+        // this.x = Math.random() * canvas.width;
+        // this.y = Math.random() * canvas.height;
 
         // Generates a random number between 1 and 16 for the size
         this.size = Math.random() * 15 + 1;
@@ -98,10 +110,8 @@ class Particle {
     }
 
     draw(){
-        ctx.fillStyle = 'blue';
-        ctx.strokeStyle = 'white';
-        ctx.lineWidth = 3;
-    
+        ctx.fillStyle = 'white';
+
         // To draw new things, lets JS know we are drawing a new shape not connected to previous lines (if there are any)
         ctx.beginPath();
     
@@ -119,17 +129,6 @@ class Particle {
     }
 
 }
-
-function init(){
-    for (let i = 0; i < 100; i++){
-
-        // push() will take what we pass it and add it to the end of the array
-        // new <ClassName> triggers the constructor method for the specified class to create one new object of that class
-        particlesArray.push(new Particle());
-    }
-    // console.log(particlesArray);
-}
-init();
 
 function handleParticles(){
     for (let i = 0; i < particlesArray.length; i++){
