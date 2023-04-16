@@ -75,8 +75,8 @@ class Particle {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
 
-        // Generates a random number between 1 and 6 for the size
-        this.size = Math.random() * 5 + 1;
+        // Generates a random number between 1 and 16 for the size
+        this.size = Math.random() * 15 + 1;
 
         // Allow dynamic movement - random number between + 1.5 and - 1.5
         // X --> + moves right, - moves left
@@ -89,12 +89,17 @@ class Particle {
     update(){
         this.x += this.speedX;
         this.y += this.speedY;
+
+        // Decrease size of circle for every animation frame
+        if (this.size > 0.2) {
+            this.size -= 0.1;
+        }
     }
 
     draw(){
         ctx.fillStyle = 'blue';
         ctx.strokeStyle = 'white';
-        ctx.lineWidth = 5;
+        ctx.lineWidth = 3;
     
         // To draw new things, lets JS know we are drawing a new shape not connected to previous lines (if there are any)
         ctx.beginPath();
@@ -102,7 +107,7 @@ class Particle {
         // Draw a circle (also can draw some other things)
         // Takes in coordinates (x, y) for the center point, Radius, Start angle (where along circular path to start drawing), End angle 
         // End angle Math.PI * 2 --> converts to 360 degrees (entire circle)
-        ctx.arc(this.x, this.y, 50, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     
         // Fill the path with color (uses color specified with fillStyle earlier)
         ctx.fill();
