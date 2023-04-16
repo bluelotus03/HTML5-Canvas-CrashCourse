@@ -123,9 +123,6 @@ class Particle {
         // Fill the path with color (uses color specified with fillStyle earlier)
         ctx.fill();
 
-        // Utilize stroke color 
-        // Note: if don't use fill(), just stroke(), will be outline of shape only
-        ctx.stroke();
     }
 
 }
@@ -154,7 +151,8 @@ function handleParticles(){
 function animate(){
 
     // Make a semi-transparent circle on top of the canvas repeatedly
-    ctx.fillStyle = 'rgba(0,0,0,0.1)';
+    // rgba last value --> opacity
+    ctx.fillStyle = 'rgba(0,0,0,0.02)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     handleParticles();
