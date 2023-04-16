@@ -86,10 +86,6 @@ class Particle {
         this.x = mouse.x;
         this.y = mouse.y;
 
-        // Set initially to between 0 and canvas width or height
-        // this.x = Math.random() * canvas.width;
-        // this.y = Math.random() * canvas.height;
-
         // Generates a random number between 1 and 16 for the size
         this.size = Math.random() * 15 + 1;
 
@@ -138,11 +134,49 @@ class Particle {
 
 }
 
+// Cycles through every particle for every frame of animation
 function handleParticles(){
     for (let i = 0; i < particlesArray.length; i++){
 
         particlesArray[i].update();
         particlesArray[i].draw();
+
+        // For every particle in the array, cycle through every other particle in the array to compare their distances
+        for (let j = i; j < particlesArray.length; j++){
+
+            // Calculate distance between center points of 2 circles using Pythagorean Theorem
+            // using difference in x and difference in y coordinates (2 sides of triangle)
+            const dx = particlesArray[i].x - particlesArray[j].x;
+            const dy = particlesArray[i].y - particlesArray[j].y;
+
+            // size of hypotenuese (3rd side of triangle)
+            // dx squared + dy squared
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            // If distance between 2 particles is less than 100, draw a line connecting them
+            if (distance < 100){
+                ctx.beginPath(); 
+
+                // Set stroke color to particle i color 
+                ctx.strokeStyle = particlesArray[i].color;
+
+                // Set line width
+                ctx. lineWidth = 0.2;
+
+                // Set starting circle
+                ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+
+                // Circle to draw line to from starting point
+                ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+
+                // Add stroke
+                ctx.stroke();
+
+                ctx.closePath();
+                
+            }
+
+        }
 
         if (particlesArray[i].size <= 0.3) {
 
@@ -153,7 +187,6 @@ function handleParticles(){
             //console.log(particlesArray.length);
             
             i--;
-
         }
     }
 }
@@ -161,10 +194,8 @@ function handleParticles(){
 // Creates an animation loop 
 function animate(){
 
-    // Make a semi-transparent circle on top of the canvas repeatedly
-    // rgba last value --> opacity
-    ctx.fillStyle = 'rgba(0,0,0,0.02)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Clear old paint from canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     handleParticles();
 
