@@ -18,6 +18,9 @@ console.log(ctx);
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+// Used for Particle class to store new particles (circles) in an array
+const particlesArray = [];
+
 // Takes in what type of event we want to listen for and callback function with code that will run that event occurs
 window.addEventListener('resize', function(){
     
@@ -58,26 +61,75 @@ canvas.addEventListener('mousemove', function(event){
     mouse.y = event.y;
 })
 
-function drawCircle() {
-    ctx.fillStyle = 'blue';
-    ctx.strokeStyle = 'white';
-    ctx.lineWidth = 5;
+// JS class is a blueprint where we define behavior and properties of the objects
+// Each time we call this class, it will create one new particle object 
+// Each particle will be one circle
+class Particle {
 
-    // To draw new things, lets JS know we are drawing a new shape not connected to previous lines (if there are any)
-    ctx.beginPath();
+    // Every class needs to have a constructor method - defines properties
+    // Behavior of the objects are defined with class methods
+    // Method - a function on an object
+    constructor(){
 
-    // Draw a circle (also can draw some other things)
-    // Takes in coordinates (x, y) for the center point, Radius, Start angle (where along circular path to start drawing), End angle 
-    // End angle Math.PI * 2 --> converts to 360 degrees (entire circle)
-    ctx.arc(mouse.x, mouse.y, 50, 0, Math.PI * 2);
+        // Set initially to between 0 and canvas width or height
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
 
-    // Fill the path with color (uses color specified with fillStyle earlier)
-    ctx.fill();
+        // Generates a random number between 1 and 6 for the size
+        this.size = Math.random() * 5 + 1;
 
-    // Utilize stroke color 
-    // Note: if don't use fill(), just stroke(), will be outline of shape only
-    ctx.stroke();
+        // Allow dynamic movement - random number between + 1.5 and - 1.5
+        // X --> + moves right, - moves left
+        // Y --> + mmoves down, - moves up
+        this.speedX = Math.random() * 3  - 1.5;
+        this.speedY = Math.random() * 3  - 1.5;
+    }
 
+    // Change x and y coordinates based on speed values
+    update(){
+        this.x += this.speedX;
+        this.y += this.speedY;
+    }
+
+    draw(){
+        ctx.fillStyle = 'blue';
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 5;
+    
+        // To draw new things, lets JS know we are drawing a new shape not connected to previous lines (if there are any)
+        ctx.beginPath();
+    
+        // Draw a circle (also can draw some other things)
+        // Takes in coordinates (x, y) for the center point, Radius, Start angle (where along circular path to start drawing), End angle 
+        // End angle Math.PI * 2 --> converts to 360 degrees (entire circle)
+        ctx.arc(this.x, this.y, 50, 0, Math.PI * 2);
+    
+        // Fill the path with color (uses color specified with fillStyle earlier)
+        ctx.fill();
+
+        // Utilize stroke color 
+        // Note: if don't use fill(), just stroke(), will be outline of shape only
+        ctx.stroke();
+    }
+
+}
+
+function init(){
+    for (let i = 0; i < 100; i++){
+
+        // push() will take what we pass it and add it to the end of the array
+        // new <ClassName> triggers the constructor method for the specified class to create one new object of that class
+        particlesArray.push(new Particle());
+    }
+    // console.log(particlesArray);
+}
+init();
+
+function handleParticles(){
+    for (let i = 0; i < particlesArray.length; i++){
+        particlesArray[i].update();
+        particlesArray[i].draw();
+    }
 }
 
 // Creates an animation loop 
@@ -87,7 +139,7 @@ function animate(){
     // Takes in coordinates (x and y), width, and height
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    drawCircle();
+    handleParticles();
 
     // Calls the function we pass it as an arg
     // Passing it the parent function will create a loop
