@@ -1,7 +1,6 @@
-# HTML5-Canvas-CrashCourse
+# [HTML5 Canvas Crash Course](https://youtu.be/Yvz_axxWG4Y)
+Completed this course on an introduction to HTML5 Canvas from Franks Laboratory.
 
-### Completed an introduction to HTML5 Canvas course from Franks Laboratory
-https://youtu.be/Yvz_axxWG4Y
+### 👉 [Try it out!](https://bluelotus03.github.io/HTML5-Canvas-CrashCourse/)
 
-### Final Effect Created
 ![Constellation Effect](ConstellationEffectClip.gif)
