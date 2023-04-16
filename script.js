@@ -35,9 +35,10 @@ window.addEventListener('resize', function(){
 
 // If we wanted to create this object everytime the screen is clicked
 // mouse will store x and y coordinates that are available throughout program
+// Initially setting them to undefined to create blank canvas to start
 const mouse = {
-    x: null,
-    y: null,
+    x: undefined,
+    y: undefined,
 }
 
 // Everytime a click event occurs, take x and y coordinates of the event and assign them to the custom mouse object
@@ -50,6 +51,14 @@ canvas.addEventListener('click', function(event){
 
     drawCircle();
     
+})
+
+// Event to be triggered everytime the mouse moves over the canvas
+// Creates a paint brush effect
+canvas.addEventListener('mousemove', function(event){
+    mouse.x = event.x;
+    mouse.y = event.y;
+    drawCircle();
 })
 
 function drawCircle() {
