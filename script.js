@@ -33,24 +33,49 @@ window.addEventListener('resize', function(){
     // ctx.fillRect(10, 10, 150, 50);
 })
 
-ctx.fillStyle = 'blue';
-ctx.strokeStyle = 'white';
-ctx.lineWidth = 5;
+// If we wanted to create this object everytime the screen is clicked
+// mouse will store x and y coordinates that are available throughout program
+const mouse = {
+    x: null,
+    y: null,
+}
 
-// To draw new things, lets JS know we are drawing a new shape not connected to previous lines (if there are any)
-ctx.beginPath();
+// Everytime a click event occurs, take x and y coordinates of the event and assign them to the custom mouse object
+canvas.addEventListener('click', function(event){
+    
+    console.log(event);
 
-// Draw a circle (also can draw some other things)
-// Takes in coordinates (x, y) for the center point, Radius, Start angle (where along circular path to start drawing), End angle 
-// End angle Math.PI * 2 --> converts to 360 degrees (entire circle)
-ctx.arc(100, 100, 50, 0, Math.PI * 2);
+    mouse.x = event.x;
+    mouse.y = event.y;
 
-// Fill the path with color (uses color specified with fillStyle earlier)
-ctx.fill();
+    drawCircle();
+    
+})
 
-// Utilize stroke color 
-// Note: if don't use fill(), just stroke(), will be outline of shape only
-ctx.stroke();
+function drawCircle() {
+    ctx.fillStyle = 'blue';
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 5;
+
+    // To draw new things, lets JS know we are drawing a new shape not connected to previous lines (if there are any)
+    ctx.beginPath();
+
+    // Draw a circle (also can draw some other things)
+    // Takes in coordinates (x, y) for the center point, Radius, Start angle (where along circular path to start drawing), End angle 
+    // End angle Math.PI * 2 --> converts to 360 degrees (entire circle)
+    ctx.arc(mouse.x, mouse.y, 50, 0, Math.PI * 2);
+
+    // Fill the path with color (uses color specified with fillStyle earlier)
+    ctx.fill();
+
+    // Utilize stroke color 
+    // Note: if don't use fill(), just stroke(), will be outline of shape only
+    ctx.stroke();
+
+}
+
+drawCircle();
+
 
 
 
