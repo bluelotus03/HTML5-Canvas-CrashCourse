@@ -155,7 +155,7 @@ function animate(){
 
     // At start of animation, clear old things from canvas
     // Takes in coordinates (x and y), width, and height
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     handleParticles();
 
