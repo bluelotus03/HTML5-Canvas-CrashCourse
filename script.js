@@ -91,6 +91,7 @@ class Particle {
         this.y += this.speedY;
 
         // Decrease size of circle for every animation frame
+        // Note: We don't go below 0.2 because we don't want a negative radius --> would break code
         if (this.size > 0.2) {
             this.size -= 0.1;
         }
@@ -132,8 +133,21 @@ init();
 
 function handleParticles(){
     for (let i = 0; i < particlesArray.length; i++){
+
         particlesArray[i].update();
         particlesArray[i].draw();
+
+        if (particlesArray[i].size <= 0.3) {
+
+            // Takes in index of the element we want to delete and deleteCount (1) --> delete one element from the array
+            particlesArray.splice(i, 1);
+
+            // Can check if particles are being removed correctly from the array
+            //console.log(particlesArray.length);
+            
+            i--;
+
+        }
     }
 }
 
