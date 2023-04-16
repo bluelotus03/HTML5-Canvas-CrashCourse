@@ -31,12 +31,7 @@ window.addEventListener('resize', function(){
     // Below all other things that need to happen with resize (like drawing the rectangle) are included in this function
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
-    // // Fill color of the following rectangle
-    // ctx.fillStyle = 'white';
-
-    // // Takes in x an y coordinates (starts from top left corner of canvas) and width and height
-    // ctx.fillRect(10, 10, 150, 50);
+    
 })
 
 // If we wanted to create this object everytime the screen is clicked
