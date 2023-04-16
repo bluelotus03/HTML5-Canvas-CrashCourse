@@ -48,8 +48,6 @@ canvas.addEventListener('click', function(event){
 
     mouse.x = event.x;
     mouse.y = event.y;
-
-    drawCircle();
     
 })
 
@@ -58,7 +56,6 @@ canvas.addEventListener('click', function(event){
 canvas.addEventListener('mousemove', function(event){
     mouse.x = event.x;
     mouse.y = event.y;
-    drawCircle();
 })
 
 function drawCircle() {
@@ -83,7 +80,22 @@ function drawCircle() {
 
 }
 
-drawCircle();
+// Creates an animation loop 
+function animate(){
+
+    // At start of animation, clear old things from canvas
+    // Takes in coordinates (x and y), width, and height
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    drawCircle();
+
+    // Calls the function we pass it as an arg
+    // Passing it the parent function will create a loop
+    requestAnimationFrame(animate);
+
+}
+
+animate();
 
 
 
