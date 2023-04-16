@@ -153,9 +153,9 @@ function handleParticles(){
 // Creates an animation loop 
 function animate(){
 
-    // At start of animation, clear old things from canvas
-    // Takes in coordinates (x and y), width, and height
-    //ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Make a semi-transparent circle on top of the canvas repeatedly
+    ctx.fillStyle = 'rgba(0,0,0,0.1)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     handleParticles();
 
