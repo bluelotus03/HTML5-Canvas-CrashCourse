@@ -1,5 +1,5 @@
 # [HTML5 Canvas Crash Course](https://youtu.be/Yvz_axxWG4Y)
-Completed this course on an introduction to HTML5 Canvas from Franks Laboratory.
+Completed this course on an introduction to HTML5 Canvas from Frank's Laboratory.
 
 ### 👉 [Try it out!](https://bluelotus03.github.io/HTML5-Canvas-CrashCourse/)
 ##### Note: To get the full effect, you need to view this on a desktop. Mobile view will allow you to tap to get some of the effect though!
